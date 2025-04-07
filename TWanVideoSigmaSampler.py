@@ -193,11 +193,14 @@ class TWanVideoSigmaSampler:
             # Let's default to EulerDiscrete as it's simple.
             # Its internal schedule won't be used.
             scheduler_args = {
-                "num_train_timesteps": 1000, # Standard value
-                "beta_start": 0.00085,       # Standard values for SD1.5/SDXL
-                "beta_end": 0.012,
-                "beta_schedule": "scaled_linear"
+                "num_train_timesteps": 1000,  # Keep this, might be needed internally
+                # "beta_start": 0.00085,       # REMOVE
+                # "beta_end": 0.012,           # REMOVE
+                # "beta_schedule": "scaled_linear" # REMOVE
             }
+            # It might even work with no arguments if num_train_timesteps isn't strictly needed
+            # when sigmas are manually set later. If the above fails, try:
+            # sample_scheduler = FlowMatchEulerDiscreteScheduler()
             sample_scheduler = FlowMatchEulerDiscreteScheduler(**scheduler_args)
             # Manually set the sigmas and timesteps on the instance
             sample_scheduler.sigmas = sigmas
@@ -580,12 +583,13 @@ class TWanVideoSigmaSampler:
             else:
                 log.warning("Transformer has no block_swap method or blocks_to_swap is 0.")
 
-        elif model.get("auto_cpu_offload", False): # Check key safely
+        elif patcher.model_options.get("auto_cpu_offload", False):  # Check key safely using patcher.model_options
             log.info("Using auto_cpu_offload.")
             for module in transformer.modules():
                 if hasattr(module, "offload"): module.offload()
                 if hasattr(module, "onload"): module.onload()
-        elif model.get("manual_offloading", True): # Check key safely, default to True if not present
+        elif patcher.model_options.get("manual_offloading",
+                                       True):  # Check key safely using patcher.model_options, default to True if not present
             log.info("Using manual_offloading (default). Moving transformer to main device.")
             transformer.to(device)
         # --- End Block Swap Init ---
@@ -1340,7 +1344,8 @@ class TWanVideoSigmaSampler:
 
         # --- Final Offloading ---
         if force_offload:
-            if model.get("manual_offloading", True): # Check key safely
+            # Access manual_offloading option from the original model's options via patcher
+            if patcher.model_options.get("manual_offloading", True):  # Check key safely using patcher.model_options
                 log.info(f"Force offload: Moving transformer to {offload_device}")
                 transformer.to(offload_device)
                 mm.soft_empty_cache()
