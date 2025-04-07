@@ -1,6 +1,6 @@
-# TWanVideoSigmaSampler: EXPERIMENTAL - DO NOT USE YET
+# TWanVideoSigmaSampler: EXPERIMENTAL
 
-**THIS NODE IS CURRENTLY A NON-FUNCTIONING PROTOTYPE AND UNDER ACTIVE DEVELOPMENT. IT IS NOT READY FOR GENERAL USE. USE AT YOUR OWN RISK!**
+**THIS NODE IS CURRENTLY A PROTOTYPE AND UNDER ACTIVE DEVELOPMENT. IT IS NOT READY FOR GENERAL USE. USE AT YOUR OWN RISK!**
 
 ## Description
 
@@ -18,7 +18,7 @@ This node is being developed to function as a (mostly) drop-in replacement for t
 
 ## Current Status
 
-*   **Testing:** Node appears to function and is currently in testing.  
+*   **Testing:** Node appears to function and is currently being tested.  
 
 ## Dependencies
 
