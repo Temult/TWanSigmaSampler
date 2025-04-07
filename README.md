@@ -18,7 +18,7 @@ This node is being developed to function as a (mostly) drop-in replacement for t
 
 ## Current Status
 
-*   **Work In Progress:** Core sampling logic is being adapted to use custom sigma schedules.
+*   **Testing:** Node appears to function and is currently in testing.  
 
 ## Dependencies
 
