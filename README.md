@@ -36,4 +36,4 @@ This node is being developed to function as a (mostly) drop-in replacement for t
 
 This node is intended to be used with custom sigma schedule generators, such as:
 
-*   **[Sigma Graph Node](https://github.com/Temult/sigma-graph-node):** A ComfyUI custom node for visually editing and generating custom sigma schedules as a graph.
+*   **[TWanSigmaGraph](https://github.com/Temult/TWanSigmaGraph):** A ComfyUI custom node for visually editing and generating custom sigma schedules as a graph.
